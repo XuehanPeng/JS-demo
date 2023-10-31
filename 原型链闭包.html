@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <script>
+
+            // 构造函数创建对象
+        // function Person(){
+
+        // }
+        // var person =new Person()
+        // person.name="rxm"
+        // console.log(person.name)
+
+        // prototype
+        // function Person(){
+        // }
+        // 函数的 prototype 属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的原型
+    //    Person.prototype.name = "pxh"
+    //    var person1 =new Person()
+    //    var person2 =new Person()
+    //    console.log(person1.name)
+    //    console.log(person2.name)
+    //    console.log(person1.__proto__)
+    //    console.log(Person.prototype)
+    //    console.log(Object.prototype)
+    //    console.log(person1.__proto__ === Person.prototype)  true
+
+    //   每一个原型都有一个constructor属性指向关联的构造函数
+    // console.log(Person.prototype.constructor===Person) true
+    // Object.getPrototypeOf()方法用于获取指定对象的原型对象
+    //   console.log(Object.getPrototypeOf(person) === Person.prototype) true
+    // console.log(Object.getPrototypeOf(person))
+    // console.log(Person.prototype)
+    // 当读取实例的属性时，如果找不到，就会查找与对象关联的原型中的属性，如果还查不到，就去找原型的原型，一直找到最顶层为止
+    //  function Person(){
+       
+    //  }
+    //  Person.prototype.name='pmc'
+    //  var person= new Person()
+    //  person.name='rxm'
+    //  console.log(person.name)
+    //  delete person.name
+    //  console.log(person.name)
+
+
+
+// foo()
+// 进入执行上下文里面还没有执行代码
+// 1.函数声明  function (){}
+// 2.变量声明   声明变量  undefined 
+// 3.agruments
+ //执行上下文
+// function foo (){
+//     console.log("foo1")
+// }
+// foo()
+// function foo (){
+//     console.log("foo2")
+// }
+// foo()
+// //两遍 foo2 函数提升
+// function foo (){
+//     console.log("foo1")
+// }
+// function foo (){
+//     console.log("foo2")
+// }
+// foo()
+// foo()
+// console.log(add2(1,1))
+// function add2(a,b){
+//     return a+b;
+// }  
+// // 输出2
+
+// console.log(add1(1,1))
+// var add1 =function(a,b){
+//     return a+b;
+// }  
+// /报错：add1 is not a function
+// 用函数语句创建的函数add2，函数名称和函数体均被提前，在声明它之前就使用它。
+// 但是使用var表达式定义函数add1，只有变量声明提前了，变量初始化代码仍然在原来的位置，没法提前执行。
+//   console.log(this)指向Window
+
+// console.log(this instanceof Object); true 全局对象是由 Object 构造函数实例化的一个对象
+// console.log(Math.random());
+// console.log(this.Math.random());
+// var a = 1;
+// console.log(this.a);
+
+// var a = 1;
+// console.log(window.a);
+
+// this.window.b = 2;
+// console.log(this.b);
+// 客户端 JavaScript 中，全局对象有 window 属性指向自身
+// function foo(a) {
+//   var b = 2;
+//   function c() {}
+//   var d = function() {};
+
+//   b = 3;
+
+// }
+
+
+// console.log(foo(1))
+// var value = 1;
+
+// var foo = {
+//   value: 2,
+//   bar: function () {
+//     return this.value;
+//   }
+// }
+
+// //示例1
+// console.log(foo.bar());
+// //示例2
+// console.log((foo.bar)());
+// //示例3
+// console.log((foo.bar = foo.bar)());
+// //示例4
+// console.log((false || foo.bar)());
+// //示例5
+// console.log((foo.bar, foo.bar)());
+// var data = [];
+
+// for (var i = 0; i < 3; i++) {
+//   data[i] = function () {
+//     console.log(i);
+//   };
+// }
+
+// data[0]();
+// data[1]();
+// data[2]();
+// var data = [];
+
+// for (var i = 0; i < 3; i++) {
+//   data[i] = (function (i) {
+//         return function(){
+//             console.log(i);
+//         }
+//   })(i);
+// }
+
+// data[0]();
+// data[1]();
+// data[2]();
+      </script>
+
+
+
+
+
+</body>
+</html>
