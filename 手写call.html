@@ -94,7 +94,20 @@
 //  return result
 // }
 ///bind
-
+//   Function.prototype.bind2=function(context){
+//     if(typeof this !== "function"){
+//         throw new Error('this is not a function')
+//     }
+//    var _this=this;
+//    var args=[...arguments].slice(1)
+//    var fNOP= function(){}
+//    var fBound=function(){
+//     return _this.apply(this instanceof fNOP? this:context,[...args,...bindArgs])
+//    }
+//    fNOP.prototype=this.prototype
+//    fBound.prototype=new fNOP()
+//    return fBound;
+//   }
     </script>
 </body>
 </html>
