@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+      //call 改变了this 指向
+    //   let foo ={
+    //     value:1
+    //   }
+    //   function bar (){
+    //     console.log(this.value)
+    //   }
+    //   bar.call(foo)
+       
+    // //   相当于来说
+    // let foo ={
+    //     value:1,
+    //     bar:function(){
+    //         console.log(this.value)
+    //     }
+    // }
+    // 1.将bar设置为foo的属性
+    // 2.指向bar
+    // 3.删除 foo bar
+//    foo.everyFn=bar 
+//    foo.everyFn() 
+//    delete foo.everyFn
+//第一次简版
+    // Function.prototype.call2= function(c){
+    //  c.fn=this;
+    //  c.fn()
+    //  delete fn()
+    // }
+    // let foo ={
+    //     value:1
+    //   }
+    //   function bar (){
+    //     console.log(this.value)
+    //   }
+    //   bar.call2(foo)
+  //call 还可以指定参数
+//   var foo = {
+//     value: 1
+// };
+
+// function bar(name, age) {
+//     console.log(name)
+//     console.log(age)
+//     console.log(this.value);
+// }
+
+// bar.call(foo, 'kevin', 18);
+// kevin
+// 18
+// 1
+//第二次简版
+// Function.prototype.call2= function(c){
+//  c.fn=this;
+//  let arg=[...arguments].slice(1)
+//  c.fn(...arg)
+//  delete c.fn
+// }
+//   var foo = {
+//     value: 1
+// };
+
+// function bar(name, age) {
+//     console.log(name)
+//     console.log(age)
+//     console.log(this.value);
+// }
+
+// bar.call2(foo, 'kevin', 18);
+//特殊情况 call null
+// Function.prototype.call2=function(c){
+//     var c= c||window;
+//  c.fn=this;
+//  let arg=[...arguments].slice(1)
+//  const result= c.fn(...arg)
+//  delete c.fn
+//  return result
+// }
+///apply
+// Function.prototype.apply2=function(c,arr=[]){
+//         var c= c||window;
+//  c.fn=this;
+//  const result= c.fn(...arr)
+//  delete c.fn
+//  return result
+// }
+///bind
+
+    </script>
+</body>
+</html>
