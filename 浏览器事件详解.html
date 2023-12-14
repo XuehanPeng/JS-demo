@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //   DOM0级事件
+    //     btn.onclick = function(){
+    //        console.log('this is a click event') 
+    //     }
+    //    //DOM2级事件
+    //    btn.addEventListener('click',function(){
+    //      // do something
+    //    })
+        // IE 中的DOM2事件
+        // btn.attachEvent('click',fn1)
+       // btn.attachEvent('click',fn2)
+       //兼容处理
+//        if(typeof btn.addEventListener === 'function'){
+//   btn.addEventListener('click',fn);
+// }else if(typeof btn.attachEvent === 'function'){
+//   btn.attachEvent('onclick',fn)
+// }else{
+//   btn.onclick=function(){
+//     // do something
+//   }
+// }
+  //总结
+//   var btn = document.getElementById('btn');
+
+// btn.onClick = () => {
+//   console.log('我是DOM0级事件处理程序');
+// }
+// btn.onClick = null;
+
+// btn.addEventListener('click', () => {
+//   console.log('我是DOM2级事件处理程序');
+// }, false);
+// btn.removeEventListener('click', handler, false)
+
+// btn.attachEvent('onclick', () => {
+//   console.log('我是IE事件处理程序')
+// })
+// btn.detachEvent('onclicn', handler);
+
+//封装浏览器兼容
+// var EventUtil = {
+//   // element是当前元素，可以通过getElementById(id)获取
+//   // type 是事件类型，一般是click ,也有可能是鼠标、焦点、滚轮事件等等
+//   // handle 事件处理函数
+//   addHandler: (element, type, handler) => {
+//     // 先检测是否存在DOM2级方法,再检测IE的方法，最后是DOM0级方法（一般不会到这）
+//     if (element.addEventListener) {
+//       // 第三个参数false表示冒泡阶段
+//       element.addEventListener(type, handler, false);
+//     } else if (element.attachEvent) {
+//       element.attachEvent(`on${type}`, handler)
+//     } else {
+//       element[`on${type}`] = handler;
+//     }
+//   },
+
+//   removeHandler: (element, type, handler) => {
+//     if (element.removeEventListener) {
+//       // 第三个参数false表示冒泡阶段
+//       element.removeEventListener(type, handler, false);
+//     } else if (element.detachEvent) {
+//       element.detachEvent(`on${type}`, handler)
+//     } else {
+//       element[`on${type}`] = null;
+//     }
+//   }
+// }
+
+// // 获取元素
+// var btn = document.getElementById('btn');
+// // 定义handler
+// var handler = function(e) {
+//   console.log('我被点击了');
+// }
+// // 监听事件
+// EventUtil.addHandler(btn, 'click', handler);
+// // 移除事件监听
+// EventUtil.removeHandler(button1, 'click', clickEvent);
+// 使用stopPropagation()取消事件传播时，事件不会被传播给下一个节点，但是，同一节点上的其他listener还是会被执行；如果想要同一层级的listener也不执行，可以使用stopImmediatePropagation()
+
+// list 的捕获
+// $list.addEventListener('click', (e) => {
+//   console.log('list capturing');
+//   e.stopPropagation();
+// }, true)
+  
+// // list 捕获 2
+// $list.addEventListener('click', (e) => {
+//   console.log('list capturing2');
+// }, true)
+
+// list capturing
+// list capturing2
+
+// 4.3.1 preventDefault与stopPropagation
+// preventDefault：比如链接被点击会导航到其href指定的URL，这个就是默认行为；
+// stopPropagation：立即停止事件在DOM层次中的传播，包括捕获和冒泡事件；
+// IE中对应的属性：
+// - srcElement => target
+// - returnValue => preventDefaukt()
+// - cancelBubble => stopPropagation()
+
+// IE 不支持事件捕获，因而只能取消事件冒泡，但stopPropagation可以同时取消事件捕获和冒泡。
+// 再针对上面不同类型的事件及属性进行区分：
+// var EventUtil = {
+//   // element是当前元素，可以通过getElementById(id)获取
+//   // type 是事件类型，一般是click ,也有可能是鼠标、焦点、滚轮事件等等
+//   // handle 事件处理函数
+//   addHandler: (element, type, handler) => {
+//     // 先检测是否存在DOM2级方法,再检测IE的方法，最后是DOM0级方法（一般不会到这）
+//     if (element.addEventListener) {
+//       // 第三个参数false表示冒泡阶段
+//       element.addEventListener(type, handler, false);
+//     } else if (element.attachEvent) {
+//       element.attachEvent(`on${type}`, handler)
+//     } else {
+//       element[`on${type}`] = handler;
+//     }
+//   },
+
+//   removeHandler: (element, type, handler) => {
+//     if (element.removeEventListener) {
+//       // 第三个参数false表示冒泡阶段
+//       element.removeEventListener(type, handler, false);
+//     } else if (element.detachEvent) {
+//       element.detachEvent(`on${type}`, handler)
+//     } else {
+//       element[`on${type}`] = null;
+//     }
+//   },
+//   // 获取event对象
+//   getEvent: (event) => {
+//     return event ? event : window.event
+//   },
+//   // 获取当前目标
+//   getTarget: (event) => {
+//     return event.target ? event.target : event.srcElement
+//   },
+//   // 阻止默认行为
+//   preventDefault: (event) => {
+//     if (event.preventDefault) {
+//       event.preventDefault()
+//     } else {
+//       event.returnValue = false
+//     }
+//   },
+//   // 停止传播事件
+//   stopPropagation: (event) => {
+//     if (event,stopPropagation) {
+//       event.stopPropagation()
+//     } else {
+//       event.cancelBubble = true
+//     }
+//   }
+// }
+
+// 事件委托：用来解决事件处理程序过多的问题
+
+// var item1 = document.getElementById("goSomewhere");
+// var item2 = document.getElementById("doSomething");
+// var item3 = document.getElementById("sayHi");
+// EventUtil.addHandler(item1, "click", function(event){
+//     location.href = "http://www.xianzao.com";
+// });
+// EventUtil.addHandler(item2, "click", function(event){
+//     document.title = "I changed the document's title";
+// });
+// EventUtil.addHandler(item3, "click", function(event){
+//     alert("hi");
+// });
+// var list = document.getElementById("myLinks");
+// EventUtil.addHandler(list, "click", function(event) {
+//   event = EventUtil.getEvent(event);
+//   var target = EventUtil.getTarget(event);
+//   switch(target.id) {
+//   case "doSomething":
+//       document.title = "I changed the document's title";
+//       break;
+//   case "goSomewhere":
+//       location.href = "http://www.wrox.com";
+//       break;
+//   case "sayHi": 9 alert("hi");
+//     break; 
+//   }
+// }
+//手写ajax
+
+// Async js and xml  异步的JS和XML
+// 在页面中发送请求 进行局部的状态更新
+// onreadystatechange 监听请求状态码的 readyState 变化的
+// readyState 0-4
+// 0：请求还未初始化 没有open()
+// 1:服务端链接建立没有send()
+// 2:请求已被接收 处理中
+// 3：请求在处理中，部分数据可用
+// 4: 请求全部返回完成
+// status  http状态码
+// 1xx-5xx
+// 状态码为2xx 成功
+// xmlHttp.status>=200&&xmlHttp.status<300 || xmlHttp.status ===304
+// xmlHttp.open('GET POST',url,true)
+// 兼容性IE 缓存问题
+// get 请求 同一地址 浏览器会返回上次相同的数据，所以需要可变的参数去改变url
+// 1.Math.random()
+// 2.new Date().getTime()
+// xmlHttp.open('get','ajax-url'+new Date().getTime(),true)
+// xmlHttp.send()
+// post 请求头
+// xmlHttp.setRequestHeader('Content-Type','application/json')
+// xmlHttp.onreadystatchage=()=>{
+//     if(xmlHttp.readystate===4){
+//         if(xmlHttp.status>=200&&xmlHttp.status<300 || xmlHttp.status ===304){
+//             xxx
+//         }
+//     }
+// }
+
+// upload 上传文件
+// 1.进度条  xhr.upload.onprogress
+// 2.添加数据 formData
+// 3.超时处理 xhr.abort 
+// 4.信息凭证  xhr.withCredentials
+// 5.在请求头中添加数据 xhr.setRequestHeader
+
+// ES6 fetch  XMLHttpRequest
+// fetch 采用的是 promise
+
+// axios 
+// 网络请求的库
+
+//  浏览器  XMLHttpRequest
+// node http
+
+
+
+    </script>
+</body>
+</html>

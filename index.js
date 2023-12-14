@@ -45,3 +45,8 @@ function bac (){
     console.log(arguments,'ddd')
 }
 bac()
+
+
+function (){
+    
+}

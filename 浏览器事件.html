@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+var EventUtil = {
+  // element是当前元素，可以通过getElementById(id)获取
+  // type 是事件类型，一般是click ,也有可能是鼠标、焦点、滚轮事件等等
+  // handle 事件处理函数
+  addHandler: (element, type, handler) => {
+    // 先检测是否存在DOM2级方法,再检测IE的方法，最后是DOM0级方法（一般不会到这）
+    if (element.addEventListener) {
+      // 第三个参数false表示冒泡阶段
+      element.addEventListener(type, handler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent(`on${type}`, handler)
+    } else {
+      element[`on${type}`] = handler;
+    }
+  },
+
+  removeHandler: (element, type, handler) => {
+    if (element.removeEventListener) {
+      // 第三个参数false表示冒泡阶段
+      element.removeEventListener(type, handler, false);
+    } else if (element.detachEvent) {
+      element.detachEvent(`on${type}`, handler)
+    } else {
+      element[`on${type}`] = null;
+    }
+  },
+  //获取event 对象
+  getEvent:(event)=>{
+   return event? event:window.event
+  },
+  //获取target
+  getTarget:(event)=>{
+   return event.target? event.target:event.srcElement
+  },
+  //阻止默认行为
+  preventDefault:(event)=>{
+    if(event.preventDefault){
+        event.preventDefault()
+    }else{
+        event.returnValue=false
+    }
+  },
+  //停止事件传播
+  stopPropagation:(event)=>{
+    if(event.stopPropagation){
+        event.stopPropagation()
+  }else{
+    event.cancelBubble=true
+  }
+}
+}
+// 获取元素
+var btn = document.getElementById('btn');
+// 定义handler
+var handler = function(e) {
+  console.log('我被点击了');
+}
+// 监听事件
+EventUtil.addHandler(btn, 'click', handler);
+// 移除事件监听
+// EventUtil.removeHandler(button1, 'click', clickEvent);
+
+//浏览器请求
+//手写ajax
+// 创建异步对象
+let xmlHttp;
+if(window.XMLHttpRequest){
+  xmlHttp=new XMLHttpRequest();
+}else {
+  xmlHttp=new ActiveXObject('Microsoft.XMLHTTP');
+}
+const ajax = (url,method,callback)=>{ 
+  let xmlHttp;
+  if(window.XMLHttpRequest){
+    xmlHttp=new XMLHttpRequest();
+  }
+}
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

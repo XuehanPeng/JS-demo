@@ -87,7 +87,7 @@
 // }
 ///apply
 // Function.prototype.apply2=function(c,arr=[]){
-//         var c= c||window;
+//         var c= c||window;u
 //  c.fn=this;
 //  const result= c.fn(...arr)
 //  delete c.fn
@@ -108,6 +108,149 @@
 //    fBound.prototype=new fNOP()
 //    return fBound;
 //   }
-    </script>
+// 
+// function fun3() {
+//     console.log('fun3')
+// }
+
+// function fun2() {
+//     fun3();
+// }
+
+// function fun1() {
+//     fun2();
+// }
+
+// fun1();
+// let arr=[1,2,3,4]
+// let arg= [...arr].slice(1)
+// // ...arguments
+// console.log(arguments)
+// Function.prototype.call2 = function(context) {
+//     context.fn = this;
+//     console.log(arguments,'arguments')
+//     let arg = [...arguments].slice(1)
+//     console.log(arg,'arg')
+//     context.fn(...arg)
+//     // console.log(context,'dddd')
+//     delete context.fn;
+// }
+// var foo = {
+//     value: 1
+// };
+// function bar(name, age) {
+//     console.log(name)
+//     console.log(age)
+//     console.log(this.value);
+// }
+// bar.call2(foo, 'kevin', 18);
+//手写bind
+//   Function.prototype.bind2=function(context){
+//      if(typeof this !== 'function'){
+//         throw new Error('this is not a function')
+//      }
+//      var _this=this;
+//      var args=[...arguments].slice(1)
+//      var fNOP=function(){}
+//      var fBound=function(){
+//         var bindArgs=[...arguments]
+//         //this instanceof fBound 生成的结果是 fBound 的实例
+//         //this instaceof  fBound: obj instanceof fBound true obj.value undefindes
+//         return _this.apply(this instanceof fBound? this:context,[...args,...bindArgs])
+//      }
+//     //  fBound.prototype=this.prototype
+//      fNOP.prototype=this.prototype
+//      fBound.prototype=new fNOP()  //fBound 修改原型
+//      return fBound;
+//   }
+//   var foo = {
+//     value: 1
+// };
+
+// function bar(name, age) {
+//     console.log(this.value);
+//     console.log(name);
+//     console.log(age);
+
+// }
+
+// var bindFoo = bar.bind2(foo, 'daisy');
+// bindFoo('18');
+  //手写call
+//   Function.prototype.call2=function(context){
+//     var context= context || window;
+//     context.fn=this;
+//     var args=[...arguments].slice(1)
+//     const result =context.fn(...args)
+//     delete context.fn;
+//     return result;
+//   }
+//   //手写apply
+//   Function.prototype.apply2=function(content,arr=[]){
+//     var context=content ||window;
+//     content.fn=this;
+//     const result =content.fn(...arr)
+//     delete content.fn;
+//     return result;
+//   }
+
+// 手写new
+//     
+//  function objetFactory(){
+//     var obj= new Object()
+//     var Constructor=[].shift.call(arguments);
+//     obj.__proto__ =Constructor.prototype;
+//     var ret= Constructor.apply(obj,arguments) //绑定this
+//     return typeof ret ==="object" ? ret:obj
+//  }
+//手写call
+// Function.prototype.call2=function(context){
+//     var context= context|| window;
+//     context.fn=this;
+//     var args=[...arguments].slice(1)
+//     const result=context.fn(...args)
+//     delete context.fn;
+//     return result;
+// }//
+// //手写apply
+// Function.prototype.apply2=function(context,arr=[]){
+//     var context =context||window;
+//     context.fn=this;
+//     const result =context.fn(...arr)
+//     delete context.fn;
+//     return result;
+// }
+// //手写bind
+// Function.prototype.bind2=function(context){
+//     if(typeof this !== "function"){
+//         throw new Error ('this is not a function')
+//     }
+//     var _this=this;
+//     var args=[...arguments].slice(1)
+//     var fNOP= function() {}
+//     var fBound=function(){
+//         var bindArgs=[...arguments]
+//         return _this.apply( this instanceof fBound? this:context,[...args,...bindArgs])
+//     }
+//     fNOP.prototype=this.prototype;
+//     fBound.prototype= new fNOP()
+//     return fBound ;
+// }
+//  function objetFactory(){
+//     var obj= new Object()
+//     var Constructor=[].shift.call(arguments);
+//     obj.__proto__ =Constructor.prototype;
+//     var ret= Constructor.apply(obj,arguments) //绑定this
+//     return typeof ret ==="object" ? ret:obj
+//  }
+//手写new
+function objetFactory(){
+    var obj=new Object()
+    const Constructor=[].shift.call(arguments)
+    pbj.__proto__=Constructor.prototype;
+    var ret=Constructor.apply(obj.arguments)
+    return typeof ret==="object"? ret:obj;
+}
+</script>
 </body>
 </html>

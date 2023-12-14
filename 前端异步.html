@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // #前端异步编程规范
+    // -简版 Promise;
+    // -Promise/A+ 规范解读;
+    // -async/await 介绍;
+    // -generator 介绍;
+//   ##异步处理概念
+//    回调函数 Promise async/await
+//    -回调函数
+//     function fetchData(callback){
+//         setTimeout(()=>{
+//        const data={name:'test'}
+//        callback(data)
+//         },1000)
+//     }
+//   fetchData(function(data){
+//     console.log(data)
+//   })
+//    -Promise 异步操作完成后执行一些回调操作
+// function fetchDataPromise(){
+//     return new Promise((resolve,reject)=>{
+//                 setTimeout(()=>{
+//        const data={name:'test'}
+//          resolve(data)
+//         },1000)
+//     })
+// }
+// fetchDataPromise().then(
+//     function(data){
+//         console.log(data)
+//     },()=>{
+//         console.log('reject')
+//     }
+// )
+// - async/await 
+//   async  function main(){
+//     const data= await fetchDataPromise()
+//   }
+// main()
+// ##异步处理常见场景处理策略
+// -网络请求  
+// -定时任务
+// -事件绑定
+// -大量数据处理 Web Worker 
+// ###处理策略
+//  -回调函数
+//  -Promise
+//  -async/await
+//  -发布订阅模式
+// -Generator 函数
+//promise.all
+//预加载资源
+// 事件监听 
+// 规范
+// 1.执行了 reslove Promise状态会变成fulfilled
+// 2.reject => rejected
+// 3.状态不可逆红
+// 4.Promise 中有 throw=>rejected
+let p1 = new Promise((resolve,reject)=>{
+    resolve('success')
+    reject('fail')
+})
+console.log('p1',p1)
+
+let p2 = new Promise((resolve, reject) => {
+    reject('success')
+    resolve('fail')
+})
+console.log('p2', p2)
+
+let p3 = new Promise((resolve, reject) => {
+    throw('error')
+})
+console.log('p3', p3)
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
